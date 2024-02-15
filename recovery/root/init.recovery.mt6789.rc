@@ -1,0 +1,87 @@
+import /init.tee.rc
+import /init.custom.rc
+
+on init
+    # Create a more standard /dev/block layout for our scripts
+    symlink /dev/block/platform/bootdevice /dev/block/bootdevice
+    mkdir /mnt/vendor/persist 0700 root root
+    mount ext4 /dev/block/platform/bootdevice/by-name/persist /mnt/vendor/persist
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
+    setprop sys.usb.configfs 1
+    setprop sys.usb.controller "musb-hdrc"
+    setprop sys.usb.ffs.aio_compat 1
+    setprop crypto.ready 1
+
+on fs
+    install_keyring
+
+on post-fs
+    start boot-hal-1-2
+    exec u:r:update_engine:s0 root root -- /system/bin/mtk_plpath_utils
+    start mtk.plpath.utils.link
+   start mobicore
+ 
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    install_keyring
+start gatekeeper-1-0
+    start keystore2
+    start keymaster-5-0
+    
+    
+service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+service keymaster-5-0 /vendor/bin/hw/android.hardware.security.keymint-service.trustonic
+    disabled
+    interface android.hardware.keymaster@4.0::IKeymasterDevice default
+    interface android.hardware.keymaster@4.1::IKeymasterDevice default
+    user root
+    group root drmrpc
+    seclabel u:r:recovery:s0
+    
+service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+    interface android.hardware.gatekeeper@1.0::IGatekeeper default
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+on property:crypto.ready=1
+    start vendor.keymint-trustonic
+
+on property:hwservicemanager.ready=true
+    start mobicore
+    start keymaster-5-0
+    start vendor.gatekeeper-1-0
+
+on property:ro.crypto.state=unsupported
+    stop mobicore
+    stop keymaster-5-0
+    stop gatekeeper-1-0
+
+on property:ro.crypto.state=unencrypted
+    stop mobicore
+    stop keymaster-5-0
+    stop gatekeeper-1-0
+
+on property:twrp.decrypt.done=true
+    stop mobicore
+    stop keymaster-5-0
+    stop gatekeeper-1-0
+
+on property:crypto.ready=0
+    stop mobicore
+    stop keymaster-5-0
+    stop gatekeeper-1-0
+
+   
+on boot
+    
+    start health-hal-2-1
+    start vendor.vibrator-default
+    setprop sys.usb.config adb
