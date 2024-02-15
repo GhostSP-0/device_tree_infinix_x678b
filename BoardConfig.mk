@@ -190,3 +190,6 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.
 # Debug
 TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
+
+# twrp config
+TW_DEVICE_VERSION := by-ghostsp
