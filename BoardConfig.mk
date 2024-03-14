@@ -192,4 +192,4 @@ TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
 
 # twrp config
-TW_DEVICE_VERSION := by-ghostsp
+TW_DEVICE_VERSION := by-GhotSP
