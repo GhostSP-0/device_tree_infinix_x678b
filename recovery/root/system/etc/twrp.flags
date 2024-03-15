@@ -55,7 +55,7 @@
 /system_image	      emmc	  /dev/block/mapper/system_a                       flags=backup=1;flashimg=1
 /vendor_image         emmc	  /dev/block/mapper/vendor_a                       flags=backup=1;flashimg=1
 /product_image   	  emmc	  /dev/block/mapper/product_a                      flags=backup=1;flashimg=1
-/system_ext_image         emmc		/dev/block/mapper/system_ext_a
+/system_ext_image         emmc		/dev/block/mapper/system_ext_a         flags=backup=1;flashimg=1
 
 # Removable Storage
 /external_sd   auto  /dev/block/mmcblk1p1  /dev/block/mmcblk0p1  flags=display="External_SDcard";storage;wipeingui;removable
