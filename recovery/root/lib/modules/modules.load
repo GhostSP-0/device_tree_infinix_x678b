@@ -111,6 +111,7 @@ mt6577_auxadc.ko
 adapter_class.ko
 charger_class.ko
 mtk_charger_algorithm_class.ko
+rt-regmap.ko
 pd_dbg_info.ko
 tcpc_class.ko
 tcpc_rt1711h.ko
@@ -159,8 +160,10 @@ tinysys-scmi.ko
 mtk-mbox-mailbox.ko
 irq-dbg.ko
 mtk-socinfo.ko
+sec.ko
 tkv.ko
 tkv_recovery.ko
 tran_rhi.ko
 tran_fp.ko
 tran_expand_key.ko
+sdcard_debug.ko
