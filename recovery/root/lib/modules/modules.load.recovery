@@ -126,6 +126,7 @@ mtk_pep20.ko
 mtk_pep.ko
 mtk_pd_charging.ko
 rfc_ta.ko
+tran_common_class.ko
 prop_ta_class.ko
 pca_rfc_ta.ko
 usb_switch.ko
@@ -138,6 +139,7 @@ tran_battery_aging.ko
 mtk_charger_framework.ko
 rt_pd_manager.ko
 mt6358_battery.ko
+tran_otg.ko
 wireless_mt5728.ko
 pwm-mtk-disp.ko
 leds-mtk.ko
@@ -146,6 +148,7 @@ leds-mtk-pwm.ko
 rt4831a_drv.ko
 extcon-mtk-usb.ko
 tcpci_late_sync.ko
+mtk-dvfsrc-helper.ko
 mtk_battery_oc_throttling.ko
 mtk_low_battery_throttling.ko
 pmic_lbat_service.ko
@@ -185,11 +188,12 @@ aw862xx_haptic.ko
 tkv.ko
 tkv_recovery.ko
 tran_rhi.ko
-pn553.ko
+nfc_i2c.ko
 transsion_tranlog.ko
 tran_fp.ko
 tran_perf_util.ko
 tran_expand_key.ko
 lzo.ko
 lzo-rle.ko
-sdcard_debug.ko
+tnek.ko
+tran_auto_test.ko
